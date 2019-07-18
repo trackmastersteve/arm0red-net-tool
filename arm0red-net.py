@@ -13,3 +13,10 @@ execute             = ""
 target              = ""
 upload_destination  = ""
 port                = 0
+
+
+def usage():
+  print "arm0red Net Tool"
+  print
+  print "Usage: arm0red-net.py -t target_host -p port"
+  
