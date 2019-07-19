@@ -40,4 +40,12 @@ def usage():
     global upload_destination
     global target
     
-    
+    if not len(sys.argv[1:]):
+      usage()
+      
+    # read the command line options
+    try:
+      opts, args = getopt.getopt(sys.argv[1:],"hle:t:p:cu:", ["help","listen","execute","target","port","command","upload"])
+    except getopt.GetoptError as err:
+      print str(err)
+      usage()
