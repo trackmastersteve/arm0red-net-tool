@@ -31,3 +31,13 @@ def usage():
   print "arm0red-net.py -t 192.168.1.1 -p 5555 -l -e=\"cat /etc/passwd\""
   print "echo 'ABCDEFGHI' | ./arm0red-net.py -t 192.168.1.23 -p 135"
   sys.exit(0)
+
+  def main():
+    global listen
+    global port
+    global execute
+    global command
+    global upload_destination
+    global target
+    
+    
