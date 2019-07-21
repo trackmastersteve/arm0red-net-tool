@@ -57,4 +57,8 @@ def usage():
         listen = True
       elif o in ("-e","--execute"):
         execute = a
+      elif o in ("-c","--commandshell"):
+        command True
+      elif o in ("-u","--upload"):
+        upload_destination = a
         
