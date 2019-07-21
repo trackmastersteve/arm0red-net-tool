@@ -49,3 +49,12 @@ def usage():
     except getopt.GetoptError as err:
       print str(err)
       usage()
+
+    for o,a in opts:
+      if o in ("-h","--help"):
+        usage()
+      elif o in ("-l","--listen"):
+        listen = True
+      elif o in ("-e","--execute"):
+        execute = a
+        
