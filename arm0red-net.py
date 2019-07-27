@@ -72,6 +72,12 @@ def usage():
     if not listen and len(target) and port > 0:
       
       # read in the buffer from the commandline
-      this will block, so send CTRL-D if not sending imput
+      # this will block, so send CTRL-D if not sending imput
+      # to stdin
+      buffer = sys.stdin.read()
       
+      # send data off
+      client_sender(buffer)
       
+    # we are going to listen and potentially
+    # upload things,
