@@ -68,4 +68,10 @@ def usage():
       else:
         assert False,"Unhandled Option"
         
-    
+    # are we going to listen or just send data from stdin?
+    if not listen and len(target) and port > 0:
+      
+      # read in the buffer from the commandline
+      this will block, so send CTRL-D if not sending imput
+      
+      
