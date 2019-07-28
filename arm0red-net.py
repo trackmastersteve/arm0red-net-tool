@@ -80,4 +80,9 @@ def usage():
       client_sender(buffer)
       
     # we are going to listen and potentially
-    # upload things,
+    # upload things, execute commands, and drop a shell back
+    # depending on our command line options above
+    if listen:
+      server_loop()
+      
+main()
