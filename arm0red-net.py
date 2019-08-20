@@ -38,6 +38,9 @@ def client_sender(buffer):
   try:
     # connect to our target host
     client.connect((target,port))
+    
+    if len(buffer):
+      client.send(buffer)
   
 def main():
   global listen
