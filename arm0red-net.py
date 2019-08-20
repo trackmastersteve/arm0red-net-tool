@@ -41,6 +41,21 @@ def client_sender(buffer):
     
     if len(buffer):
       client.send(buffer)
+      
+    while True:
+      
+      # now wait for data back
+      recv_len = 1
+      response = ""
+      
+      while recv_len:
+        
+        data = client.recv(4096)
+        recv_len = len(data)
+        response+= data
+        
+        if recv_len < 4096:
+          break
   
 def main():
   global listen
