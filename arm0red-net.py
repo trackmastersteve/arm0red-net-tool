@@ -56,6 +56,21 @@ def client_sender(buffer):
         
         if recv_len < 4096:
           break
+          
+      print response,
+      
+      # wait for more input
+      buffer = raw_input("")
+      buffer += "\n"
+      
+      # send it off
+      client.send(buffer)
+      
+  except:
+    print "[*] Exception! Exiting."
+    
+    # tear down the connection
+    client.close()
   
 def main():
   global listen
