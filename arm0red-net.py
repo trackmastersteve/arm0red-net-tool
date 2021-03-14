@@ -192,7 +192,7 @@ def main():
     elif o in ("-e","--execute"):
       execute = a
     elif o in ("-c","--commandshell"):
-      command True
+      command = True
     elif o in ("-u","--upload"):
       upload_destination = a
     elif o in ("-t","--target"):
