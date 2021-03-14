@@ -1,6 +1,7 @@
 #
 #
-# arm0red-net.py
+# Arm0red Net Tool
+# ant.py
 
 import sys
 import socket
