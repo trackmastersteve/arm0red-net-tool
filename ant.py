@@ -23,7 +23,7 @@ port                = 0
 def usage():
   print("arm0red Net Tool")
   print()
-  print("Usage: arm0red-net.py -t target_host -p port")
+  print("Usage: ant.py -t target_host -p port")
   print("-l --listen                    - listen on [host]:[port] for incoming connections")
   print("-e --execute=file_to_run       - execute the given file upon receiving a connection")
   print("-c --command                   - initialize a command shell")
@@ -31,10 +31,10 @@ def usage():
   print()
   print()
   print("Examples: ")
-  print("arm0red-net.py -t 192.168.1.1 -p 5555 -l -c")
-  print("arm0red-net.py -t 192.168.1.1 -p 5555 -l -u=c:\\target.exe")
-  print("arm0red-net.py -t 192.168.1.1 -p 5555 -l -e=\"cat /etc/passwd\"")
-  print("echo 'ABCDEFGHI' | ./arm0red-net.py -t 192.168.1.23 -p 135")
+  print("ant.py -t 192.168.1.1 -p 5555 -l -c")
+  print("ant.py -t 192.168.1.1 -p 5555 -l -u=c:\\target.exe")
+  print("arnt.py -t 192.168.1.1 -p 5555 -l -e=\"cat /etc/passwd\"")
+  print("echo 'ABCDEFGHI' | ./ant.py -t 192.168.1.23 -p 135")
   sys.exit(0)
 
 def client_sender(buffer):
@@ -55,7 +55,7 @@ def client_sender(buffer):
       
       while recv_len:
         
-        data = client.recv(4096)
+        data = client.recv(4096).decode("UTF-8")
         recv_len = len(data)
         response+= data
         
@@ -137,10 +137,10 @@ def client_handler(client_socket):
             file_descriptor.close()
 
             # acknolege that we wrote the file out
-            client_socket.send("Successfully saved file to %s\r\n" % upload_destination)
+            client_socket.send(str.encode("Successfully saved file to %s\r\n" % upload_destination))
 
         except:
-            client_socket.send("Failed to save file to %s\r\n" % upload_destination)
+            client_socket.send(str.encode("Failed to save file to %s\r\n" % upload_destination))
 
     # check for command execution
     if len(execute):
@@ -154,7 +154,7 @@ def client_handler(client_socket):
     if command:
         while True:
             # show a simple prompt
-            client_socket.send("<ANT:#> ")
+            client_socket.send(str.encode("<ANT:#> "))
 
             # now we receive until we see a linefeed (enter key)
             cmd_buffer = ""
@@ -165,7 +165,7 @@ def client_handler(client_socket):
             response = run_command(cmd_buffer)
 
             # send back the response
-            client_socket.send(response)
+            client_socket.send(str.encode(response))
 
 def main():
   global listen
