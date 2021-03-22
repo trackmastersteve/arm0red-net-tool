@@ -71,7 +71,7 @@ def client_sender(buffer):
       # send it off
       client.send(buffer.encode("ascii"))
       
-  exceptException as e:
+  except Exception as e:
     print("[*] Exception! Exiting.")
     print(e)
     
