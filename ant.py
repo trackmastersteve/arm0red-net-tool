@@ -147,8 +147,9 @@ def client_handler(client_socket):
 
         # run the command
         output = run_command(execute)
+        output_str = str(output, "UTF-8")
 
-        client_socket.send(output)
+        client_socket.send(str.encode(output_str))
 
     # now we go into another loop if a command shell was requested
     if command:
@@ -159,13 +160,14 @@ def client_handler(client_socket):
             # now we receive until we see a linefeed (enter key)
             cmd_buffer = ""
             while "\n" not in cmd_buffer:
-                cmd_buffer += client_socket.recv(1024)
+                cmd_buffer += client_socket.recv(1024).decode("UTF-8")
 
             # send back the command output
             response = run_command(cmd_buffer)
+            response_str = str(response, "UTF-8")
 
             # send back the response
-            client_socket.send(str.encode(response))
+            client_socket.send(str.encode(response_str))
 
 def main():
   global listen
