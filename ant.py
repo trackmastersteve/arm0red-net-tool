@@ -1,4 +1,4 @@
-#
+#!/bin/python3
 #
 # Arm0red Net Tool
 # ant.py
