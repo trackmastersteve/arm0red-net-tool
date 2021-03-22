@@ -45,7 +45,7 @@ def client_sender(buffer):
     client.connect((target,port))
     
     if len(buffer):
-      client.send(buffer)
+      client.send(buffer.encode("ascii"))
       
     while True:
       
@@ -55,9 +55,9 @@ def client_sender(buffer):
       
       while recv_len:
         
-        data = client.recv(4096).decode("UTF-8")
+        data = client.recv(4096)
         recv_len = len(data)
-        response+= data
+        response += data.decode("UTF-8")
         
         if recv_len < 4096:
           break
@@ -65,14 +65,15 @@ def client_sender(buffer):
       print(response,)
       
       # wait for more input
-      buffer = raw_input("")
+      buffer = input("")
       buffer += "\n"
       
       # send it off
-      client.send(buffer)
+      client.send(buffer.encode("ascii"))
       
-  except:
+  exceptException as e:
     print("[*] Exception! Exiting.")
+    print(e)
     
     # tear down the connection
     client.close()
@@ -136,7 +137,7 @@ def client_handler(client_socket):
             file_descriptor.write(file_buffer)
             file_descriptor.close()
 
-            # acknolege that we wrote the file out
+            # acknowlege that we wrote the file out
             client_socket.send(str.encode("Successfully saved file to %s\r\n" % upload_destination))
 
         except:
@@ -155,7 +156,7 @@ def client_handler(client_socket):
     if command:
         while True:
             # show a simple prompt
-            client_socket.send(str.encode("<ANT:#> "))
+            client_socket.send(str.encode("<ANT:#> ", "UTF-8"))
 
             # now we receive until we see a linefeed (enter key)
             cmd_buffer = ""
