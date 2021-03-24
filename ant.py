@@ -45,7 +45,7 @@ def client_sender(buffer):
     client.connect((target,port))
     
     if len(buffer):
-      client.send(buffer.encode("ascii"))
+      client.send(bytes(str(buffer), "UTF-8"))
       
     while True:
       
@@ -69,7 +69,7 @@ def client_sender(buffer):
       buffer += "\n"
       
       # send it off
-      client.send(buffer.encode("ascii"))
+      client.send(bytes(str(buffer), "UTF-8"))
       
   except Exception as e:
     print("[*] Exception! Exiting.")
@@ -138,25 +138,24 @@ def client_handler(client_socket):
             file_descriptor.close()
 
             # acknowlege that we wrote the file out
-            client_socket.send(str.encode("Successfully saved file to %s\r\n" % upload_destination))
+            client_socket.send(bytes(str("Successfully saved file to %s\r\n" % upload_destination), "UTF-8"))
 
         except:
-            client_socket.send(str.encode("Failed to save file to %s\r\n" % upload_destination))
+            client_socket.send(bytes(str("Failed to save file to %s\r\n" % upload_destination), "UTF-8"))
 
     # check for command execution
     if len(execute):
 
         # run the command
         output = run_command(execute)
-        output_str = str(output, "UTF-8")
 
-        client_socket.send(str.encode(output_str))
+        client_socket.send(bytes(str(output_str), "UTF-8"))
 
     # now we go into another loop if a command shell was requested
     if command:
         while True:
             # show a simple prompt
-            client_socket.send(str.encode("<ANT:#> ", "UTF-8"))
+            client_socket.send(bytes(str("<ANT:#> "), "UTF-8"))
 
             # now we receive until we see a linefeed (enter key)
             cmd_buffer = ""
@@ -165,10 +164,9 @@ def client_handler(client_socket):
 
             # send back the command output
             response = run_command(cmd_buffer)
-            response_str = str(response, "UTF-8")
 
             # send back the response
-            client_socket.send(str.encode(response_str))
+            client_socket.send(bytes(str(response_str), "UTF-8"))
 
 def main():
   global listen
