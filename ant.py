@@ -160,13 +160,13 @@ def client_handler(client_socket):
             # now we receive until we see a linefeed (enter key)
             cmd_buffer = ""
             while "\n" not in cmd_buffer:
-                cmd_buffer += client_socket.recv(1024).decode("UTF-8")
+                cmd_buffer += client_socket.recv(1024)#.decode("UTF-8")
 
             # send back the command output
             response = run_command(cmd_buffer)
 
             # send back the response
-            client_socket.send(bytes(str(response) + " \n", "UTF-8"))
+            client_socket.send(bytes(str(response) + "\n", "UTF-8"))
 
 def main():
   global listen
