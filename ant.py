@@ -149,7 +149,7 @@ def client_handler(client_socket):
         # run the command
         output = run_command(execute)
 
-        client_socket.send(bytes(str(output_str), "UTF-8"))
+        client_socket.send(bytes(str(output), "UTF-8"))
 
     # now we go into another loop if a command shell was requested
     if command:
