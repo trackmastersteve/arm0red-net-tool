@@ -31,10 +31,10 @@ def usage():
   print()
   print()
   print("Examples: ")
-  print("ant.py -t 192.168.1.1 -p 5555 -l -c")
-  print("ant.py -t 192.168.1.1 -p 5555 -l -u=c:\\target.exe")
-  print("arnt.py -t 192.168.1.1 -p 5555 -l -e=\"cat /etc/passwd\"")
-  print("echo 'ABCDEFGHI' | ./ant.py -t 192.168.1.23 -p 135")
+  print("ant.py -l -p 5555 -c")
+  print("ant.py -t 192.168.1.23 -p 5555 -l -u=c:\\target.exe")
+  print("arnt.py -t 192.168.1.45 -p 5555 -l -e=\"cat /etc/passwd\"")
+  print("echo 'ABCDEFGHI' | ./ant.py -t 192.168.1.67 -p 8910")
   sys.exit(0)
 
 def client_sender(buffer):
